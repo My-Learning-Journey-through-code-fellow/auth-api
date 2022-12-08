@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "init:config": "sequelize init:config",
+    "db:config": "sequelize init:config",
     "db:create": "sequelize db:create",
     "watch": "nodemon index.js",
-    "lint": "eslint **/*.js",
-    "test": "jest --coverage",
-    "test-watch": "jest --watchAll --coverage"
+    "test": "NODE_ENV=test jest --verbose --watchAll --coverage",
+    "test-watch": "NODE_ENV=test jest --verbose --watchAll --coverage"
   },
   "jest": {
     "testEnvironment": "node"
@@ -20,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "base-64": "^1.0.0",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
@@ -30,12 +29,11 @@
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "pg": "^8.6.0",
-    "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0",
-    "sqlite3": "^5.0.2",
+    "sequelize": "^6.26.0",
+    "sequelize-cli": "^6.5.2",
+    "sqlite": "^4.1.2",
     "supertest": "^6.0.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TraceDugar/auth-api.git"
