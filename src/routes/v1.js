@@ -3,7 +3,7 @@
 const express = require('express');
 const dataModules = require('../models');
 const router = express.Router();
-const { users } = require('./models');
+const { users } = require('../auth/models');
 const basicAuth = require('../auth/middleware/basic');
 const bearerAuth = require('../auth/middleware/bearer');
 const permissions = require('../auth/middleware/acl');

@@ -2,7 +2,7 @@
   "development": {
     "username": "tdugar",
     "password": null,
-    "database": "api_auth",
+    "database": "bearer_auth",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
