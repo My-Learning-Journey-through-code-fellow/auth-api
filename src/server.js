@@ -1,28 +1,25 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
 
-const notFoundHandler = require('./error-handlers/404.js');
-const errorHandler = require('./error-handlers/500.js');
-const logger = require('./middleware/logger.js');
-const routes = require('./routes/v1');
+const notFoundHandler = require('./error-handlers/404');
+const errorHandler = require('./error-handlers/500');
+const logger = require('./middleware/logger');
 
-const v1Routes = require('./routes/v1.js');
+const authRoutes = require('./auth/routes');
+const v1Routes = require('./routes/v1');
+const v2Routes = require('./routes/v2');
 
 const app = express();
 
-app.use(cors());
-app.use(morgan('dev'));
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.use(logger);
 
-app.use(routes);
-app.use('/api/v1', v1Routes); // http://localhost:3000/api/v1/clothes
+app.use(authRoutes);
+app.use('/api/v1', v1Routes);
+app.use('/api/v2', v2Routes); 
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);

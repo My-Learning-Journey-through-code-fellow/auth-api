@@ -8,12 +8,12 @@ const userModel = (sequelize, DataTypes) => {
   const model = sequelize.define('Users', {
     username: { type: DataTypes.STRING, required: true, unique: true },
     password: { type: DataTypes.STRING, required: true },
-    role: { type: DataTypes.ENUM('user', 'writer', 'editor', 'admin'), required: true, defaultValue: 'user'},
+    role: { type: DataTypes.ENUM('user', 'writer', 'editor', 'admin'), required: true, defaultValue: 'user' },
     token: {
       type: DataTypes.VIRTUAL,
       get() {
-        return jwt.sign({ username: this.username }, SECRET, 
-          {expiresIn: 1000 * 60 * 60 * 24 * 7});
+        return jwt.sign({ username: this.username }, SECRET,
+          { expiresIn: 1000 * 60 * 60 * 24 * 7 });
       },
       set(tokenObj) {
         let token = jwt.sign(tokenObj, SECRET);
@@ -48,8 +48,8 @@ const userModel = (sequelize, DataTypes) => {
 
   model.authenticateWithToken = async function (token) {
     try {
-      const parsedToken = jwt.verify(token, process.env.SECRET);
-      const user = this.findOne({where: { username: parsedToken.username } });
+      const parsedToken = jwt.verify(token, SECRET);
+      const user = this.findOne({ where: { username: parsedToken.username } });
       if (user) { return user; }
       throw new Error('User Not Found');
     } catch (e) {
